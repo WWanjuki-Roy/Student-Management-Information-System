@@ -1,0 +1,194 @@
+/* ========================================
+   GLOBAL STYLES
+======================================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+}
+
+/* ========================================
+   NAVBAR
+======================================== */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* ========================================
+   SIDEBAR
+======================================== */
+.bg-light {
+    background-color: #ffffff !important;
+    border-right: 1px solid #dee2e6;
+}
+
+.nav-link {
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+}
+
+.nav-link:hover {
+    background-color: #0d6efd;
+    color: #fff !important;
+    transform: translateX(5px);
+}
+
+.nav-link.active {
+    background-color: #0d6efd;
+    color: white !important;
+}
+
+/* ========================================
+   CARDS
+======================================== */
+.card {
+    border-radius: 12px;
+    border: none;
+    transition: 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card h5 {
+    font-weight: 600;
+}
+
+/* Dashboard stat cards */
+.card.bg-primary,
+.card.bg-success,
+.card.bg-warning,
+.card.bg-danger {
+    border-radius: 12px;
+}
+
+/* ========================================
+   TABLES
+======================================== */
+.table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: #343a40;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+}
+
+.table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table-striped tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #084298;
+}
+
+.btn-success:hover {
+    background-color: #0f5132;
+}
+
+.btn-danger:hover {
+    background-color: #842029;
+}
+
+.btn-warning:hover {
+    background-color: #664d03;
+}
+
+/* ========================================
+   FORMS
+======================================== */
+.form-control,
+.form-select {
+    border-radius: 8px;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 6px rgba(13,110,253,0.4);
+}
+
+/* ========================================
+   ALERTS
+======================================== */
+.alert {
+    border-radius: 8px;
+}
+
+/* ========================================
+   LOGIN PAGE
+======================================== */
+.vh-100 {
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+}
+
+.card.shadow {
+    border-radius: 15px;
+}
+
+.card.shadow h4 {
+    font-weight: 600;
+}
+
+/* ========================================
+   BADGES
+======================================== */
+.badge {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+/* ========================================
+   FOOTER SPACING FIX
+======================================== */
+.container-fluid {
+    padding-bottom: 20px;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+@media (max-width: 768px) {
+
+    .col-md-2 {
+        display: none;
+    }
+
+    .col-md-10 {
+        width: 100%;
+    }
+
+    .card {
+        margin-bottom: 15px;
+    }
+}

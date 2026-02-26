@@ -19,13 +19,13 @@ $units = $conn->query("SELECT COUNT(*) as total FROM units")->fetch_assoc()['tot
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card bg-success text-black p-3">
+        <div class="card bg-success text-white p-3">
             <h5>Total Lecturers</h5>
             <h2><?= $lecturers ?></h2>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card bg-warning text-black p-3">
+        <div class="card bg-warning text-white p-3">
             <h5>Total Units</h5>
             <h2><?= $units ?></h2>
         </div>

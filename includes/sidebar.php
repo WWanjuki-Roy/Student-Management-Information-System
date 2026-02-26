@@ -1,4 +1,4 @@
-<div class="col-md-2 bg-light vh-100 p-3">
+<div class="col-md-2 sidebar vh-100 p-3">
     <ul class="nav flex-column">
 
         <?php if($_SESSION['role'] == 'admin'): ?>

@@ -37,7 +37,7 @@ body {
 /* SIDEBAR */
 
 .sidebar {
-  background: #f4efe6;
+  background-color: var(--sidebar) !important;
   border-right: 1px solid var(--border);
 }
 
@@ -198,34 +198,4 @@ body {
   .card {
     margin-bottom: 15px;
   }
-}
-/* ===== SIDEBAR ===== */
-
-.sidebar {
-  background: #f4efe6; /* soft beige */
-  border-right: 1px solid #e2dccf;
-}
-
-/* menu links */
-.sidebar .nav-link {
-  color: #3a3a3a;
-  font-weight: 600;
-  padding: 10px 14px;
-  margin-bottom: 8px;
-  border-radius: 10px;
-  transition: all 0.25s ease;
-}
-
-/* hover effect */
-.sidebar .nav-link:hover {
-  background-color: #e6dcc8;
-  color: #1f1f1f;
-  transform: translateX(4px);
-}
-
-/* active page */
-.sidebar .nav-link.active {
-  background: #d6c3a1;
-  color: #1f1f1f !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }

@@ -22,28 +22,28 @@ $totalRegistrations = $conn->query("SELECT COUNT(*) as t FROM unit_registrations
 <div class="row">
 
 <div class="col-md-3">
-<div class="card bg-primary text-white p-3">
+<div class="card gray-card p-3">
 <h6>Total Students</h6>
 <h2><?= $totalStudents ?></h2>
 </div>
 </div>
 
 <div class="col-md-3">
-<div class="card bg-success text-white p-3">
+<div class="card gray-card p-3">
 <h6>Total Lecturers</h6>
 <h2><?= $totalLecturers ?></h2>
 </div>
 </div>
 
 <div class="col-md-3">
-<div class="card bg-warning text-white p-3">
+<div class="card gray-card p-3">
 <h6>Total Units</h6>
 <h2><?= $totalUnits ?></h2>
 </div>
 </div>
 
 <div class="col-md-3">
-<div class="card bg-danger text-white p-3">
+<div class="card gray-card p-3">
 <h6>Total Registrations</h6>
 <h2><?= $totalRegistrations ?></h2>
 </div>

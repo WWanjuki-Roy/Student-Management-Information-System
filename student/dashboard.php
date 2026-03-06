@@ -17,7 +17,7 @@ $totalUnits = $conn->query("SELECT COUNT(*) as t FROM unit_registrations WHERE s
 
 <h3>Student Dashboard</h3>
 
-<div class="card bg-success text-white p-3">
+<div class="card gray-card p-3">
 <h5>Registered Units</h5>
 <h2><?= $totalUnits ?></h2>
 </div>

@@ -17,7 +17,7 @@ $totalUnits = $conn->query("SELECT COUNT(*) as t FROM units WHERE lecturer_id=$l
 
 <h3>Lecturer Dashboard</h3>
 
-<div class="card bg-primary text-white p-3">
+<div class="card gray-card p-3">
 <h5>My Assigned Units</h5>
 <h2><?= $totalUnits ?></h2>
 </div>

@@ -26,7 +26,7 @@ if(isset($_POST['upload'])){
     $stmt->bind_param("iiis",$student_id,$unit_id,$marks,$grade);
     $stmt->execute();
 
-    echo "<div class='alert alert-success'>Result Uploaded</div>";
+    echo "<div class='alert alert-success'>Result Uploaded Successfully</div>";
 }
 
 $units = $conn->query("SELECT * FROM units WHERE lecturer_id=$lecturer_id");
@@ -34,18 +34,36 @@ $units = $conn->query("SELECT * FROM units WHERE lecturer_id=$lecturer_id");
 
 <h3>Upload Results</h3>
 
+<div class="card gray-card p-3">
+
 <form method="POST">
-<select name="unit_id" class="form-select mb-3" required>
+
+<div class="mb-3">
+<label>Select Unit</label>
+<select name="unit_id" class="form-control" required>
 <option value="">Select Unit</option>
 <?php while($u = $units->fetch_assoc()): ?>
 <option value="<?= $u['id'] ?>"><?= $u['unit_name'] ?></option>
 <?php endwhile; ?>
 </select>
+</div>
 
-<input type="number" name="student_id" class="form-control mb-3" placeholder="Student ID" required>
-<input type="number" name="marks" class="form-control mb-3" placeholder="Marks" required>
+<div class="mb-3">
+<label>Student ID</label>
+<input type="number" name="student_id" class="form-control" placeholder="Enter Student ID" required>
+</div>
 
-<button name="upload" class="btn btn-primary">Upload</button>
+<div class="mb-3">
+<label>Marks</label>
+<input type="number" name="marks" class="form-control" placeholder="Enter Marks" required>
+</div>
+
+<button name="upload" class="btn btn-primary">
+Upload Result
+</button>
+
 </form>
+
+</div>
 
 <?php include("../includes/footer.php"); ?>

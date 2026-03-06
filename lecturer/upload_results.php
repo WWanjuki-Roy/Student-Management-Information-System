@@ -27,42 +27,72 @@ if (isset($_POST['upload'])) {
     if ($student_id <= 0 || $unit_id <= 0 || $marks < 0 || $marks > 100) {
         $message = "<div class='alert alert-danger'>Please enter valid student ID, unit, and marks between 0 and 100.</div>";
     } else {
-        // Grade calculation using if/elseif
-        if ($marks >= 70) {
-            $grade = "A";
-        } elseif ($marks >= 60) {
-            $grade = "B";
-        } elseif ($marks >= 50) {
-            $grade = "C";
-        } elseif ($marks >= 40) {
-            $grade = "D";
+        $unit_check_stmt = $conn->prepare("SELECT id FROM units WHERE id = ? AND lecturer_id = ?");
+        $unit_check_stmt->bind_param("ii", $unit_id, $lecturer_id);
+        $unit_check_stmt->execute();
+        $owned_unit = $unit_check_stmt->get_result();
+
+        if ($owned_unit->num_rows === 0) {
+            $message = "<div class='alert alert-danger'>You are not allowed to upload results for that unit.</div>";
         } else {
-            $grade = "F";
-        }
+            $student_check_stmt = $conn->prepare("SELECT id FROM users WHERE id = ? AND role = 'student'");
+            $student_check_stmt->bind_param("i", $student_id);
+            $student_check_stmt->execute();
+            $student_exists = $student_check_stmt->get_result();
 
-        // Check if result already exists
-        $check_stmt = $conn->prepare("SELECT id FROM results WHERE student_id = ? AND unit_id = ?");
-        $check_stmt->bind_param("ii", $student_id, $unit_id);
-        $check_stmt->execute();
-        $existing_result = $check_stmt->get_result();
-
-        if ($existing_result->num_rows > 0) {
-            $message = "<div class='alert alert-warning'>Result for this student and unit already exists.</div>";
-        } else {
-            // Insert result
-            $insert_stmt = $conn->prepare("INSERT INTO results (student_id, unit_id, marks, grade, published) VALUES (?, ?, ?, ?, 0)");
-            $insert_stmt->bind_param("iiis", $student_id, $unit_id, $marks, $grade);
-
-            if ($insert_stmt->execute()) {
-                $message = "<div class='alert alert-success'>Result Uploaded Successfully</div>";
+            if ($student_exists->num_rows === 0) {
+                $message = "<div class='alert alert-danger'>Selected student does not exist.</div>";
             } else {
-                $message = "<div class='alert alert-danger'>Failed to upload result.</div>";
+                $registration_stmt = $conn->prepare("SELECT id FROM unit_registrations WHERE student_id = ? AND unit_id = ?");
+                $registration_stmt->bind_param("ii", $student_id, $unit_id);
+                $registration_stmt->execute();
+                $is_registered = $registration_stmt->get_result();
+
+                if ($is_registered->num_rows === 0) {
+                    $message = "<div class='alert alert-danger'>Student is not registered for the selected unit.</div>";
+                } else {
+                    if ($marks >= 70) {
+                        $grade = "A";
+                    } elseif ($marks >= 60) {
+                        $grade = "B";
+                    } elseif ($marks >= 50) {
+                        $grade = "C";
+                    } elseif ($marks >= 40) {
+                        $grade = "D";
+                    } else {
+                        $grade = "F";
+                    }
+
+                    $check_stmt = $conn->prepare("SELECT id FROM results WHERE student_id = ? AND unit_id = ?");
+                    $check_stmt->bind_param("ii", $student_id, $unit_id);
+                    $check_stmt->execute();
+                    $existing_result = $check_stmt->get_result();
+
+                    if ($existing_result->num_rows > 0) {
+                        $message = "<div class='alert alert-warning'>Result for this student and unit already exists.</div>";
+                    } else {
+                        $insert_stmt = $conn->prepare("INSERT INTO results (student_id, unit_id, marks, grade, published) VALUES (?, ?, ?, ?, 0)");
+                        $insert_stmt->bind_param("iiis", $student_id, $unit_id, $marks, $grade);
+
+                        if ($insert_stmt->execute()) {
+                            $message = "<div class='alert alert-success'>Result uploaded successfully.</div>";
+                        } else {
+                            $message = "<div class='alert alert-danger'>Failed to upload result.</div>";
+                        }
+
+                        $insert_stmt->close();
+                    }
+
+                    $check_stmt->close();
+                }
+
+                $registration_stmt->close();
             }
 
-            $insert_stmt->close();
+            $student_check_stmt->close();
         }
 
-        $check_stmt->close();
+        $unit_check_stmt->close();
     }
 }
 ?>

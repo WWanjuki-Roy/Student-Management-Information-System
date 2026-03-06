@@ -17,6 +17,7 @@ SIMS provides three portals:
 - Manage lecturers (create, edit, delete with unit-assignment checks).
 - Manage units (code, name, lecturer assignment, semester assignment).
 - Manage academic setup (academic years and semesters).
+- Publish or unpublish student results.
 - View basic system reports.
 
 ### Lecturer
@@ -164,6 +165,7 @@ CREATE TABLE results (
 - Login: `auth/login.php`
 - First admin creation: `auth/register_admin.php`
 - Admin dashboard: `admin/dashboard.php`
+- Publish results: `admin/publish_results.php`
 - Lecturer dashboard: `lecturer/dashboard.php`
 - Student dashboard: `student/dashboard.php`
 
@@ -172,3 +174,4 @@ CREATE TABLE results (
 - Passwords are securely stored with `password_hash` and verified via `password_verify`.
 - Bootstrap is loaded via CDN.
 - `config/db.php` currently defaults to local XAMPP/WAMP-style credentials.
+- Optional DB hardening constraints are available in `database/hardening_constraints.sql`.

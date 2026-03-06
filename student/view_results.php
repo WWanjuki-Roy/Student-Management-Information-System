@@ -1,13 +1,27 @@
 <?php
 include("../includes/auth_check.php");
 include("../config/db.php");
+
+if(!isset($_SESSION['role']) || $_SESSION['role'] != 'student'){
+    header("Location: ../auth/login.php");
+    exit();
+}
+
 include("../includes/header.php");
 include("../includes/sidebar.php");
 
 $student_id = $_SESSION['user_id'];
 
-$sql = "SELECT * FROM results WHERE student_id = $student_id AND published=1";
-$result = $conn->query($sql);
+$stmt = $conn->prepare("
+SELECT units.unit_code, units.unit_name, results.marks, results.grade
+FROM results
+JOIN units ON results.unit_id = units.id
+WHERE results.student_id = ? AND results.published = 1
+ORDER BY units.unit_name ASC
+");
+$stmt->bind_param("i", $student_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
 $total_points = 0;
 $count = 0;
@@ -17,6 +31,7 @@ $count = 0;
 
 <table class="table table-striped">
 <tr>
+    <th>Code</th>
     <th>Unit</th>
     <th>Marks</th>
     <th>Grade</th>
@@ -27,9 +42,10 @@ $count = 0;
     $count++;
 ?>
 <tr>
-    <td><?= $row['unit_id'] ?></td>
-    <td><?= $row['marks'] ?></td>
-    <td><?= $row['grade'] ?></td>
+    <td><?= htmlspecialchars($row['unit_code']) ?></td>
+    <td><?= htmlspecialchars($row['unit_name']) ?></td>
+    <td><?= (int)$row['marks'] ?></td>
+    <td><?= htmlspecialchars($row['grade']) ?></td>
 </tr>
 <?php endwhile; ?>
 </table>
@@ -41,4 +57,5 @@ if($count > 0){
 }
 ?>
 
+<?php $stmt->close(); ?>
 <?php include("../includes/footer.php"); ?>

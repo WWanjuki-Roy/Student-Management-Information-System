@@ -7,6 +7,7 @@
             <li><a class="nav-link" href="../admin/manage_lecturers.php">Lecturers</a></li>
             <li><a class="nav-link" href="../admin/manage_units.php">Units</a></li>
             <li><a class="nav-link" href="../admin/manage_academic.php">Academic Setup</a></li>
+            <li><a class="nav-link" href="../admin/publish_results.php">Publish Results</a></li>
             <li><a class="nav-link" href="../admin/view_reports.php">Reports</a></li>
         <?php endif; ?>
 
